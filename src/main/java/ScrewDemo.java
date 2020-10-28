@@ -4,29 +4,19 @@ import cn.smallbun.screw.core.engine.EngineFileType;
 import cn.smallbun.screw.core.engine.EngineTemplateType;
 import cn.smallbun.screw.core.execute.DocumentationExecute;
 import cn.smallbun.screw.core.process.ProcessConfig;
-import com.zaxxer.hikari.HikariConfig;
-import com.zaxxer.hikari.HikariDataSource;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * @author : gaozhiwen
  * @date : 2020/10/23
  */
 public class ScrewDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //数据源
-        HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setDriverClassName("com.mysql.jdbc.Driver");
-        hikariConfig.setJdbcUrl("");
-        hikariConfig.setUsername("");
-        hikariConfig.setPassword("");
-        //设置可以获取tables remarks信息
-        hikariConfig.addDataSourceProperty("useInformationSchema", "true");
-        hikariConfig.setMinimumIdle(2);
-        hikariConfig.setMaximumPoolSize(5);
-        DataSource dataSource = new HikariDataSource(hikariConfig);
+        DataSource dataSource = ScrewDiffDemo.getDataSource(ScrewDiffDemo.getProperties());
 
         //生成配置
         EngineConfig engineConfig = EngineConfig.builder()
@@ -54,7 +44,7 @@ public class ScrewDemo {
         ProcessConfig processConfig = ProcessConfig.builder()
                 //指定生成逻辑、当存在指定表、指定表前缀、指定表后缀时，将生成指定表，其余表不生成、并跳过忽略表配置
                 //根据名称指定表生成
-                .designatedTableName(new ArrayList<>())
+                .designatedTableName(Arrays.asList(""))
                 //根据表前缀生成
 //                .designatedTablePrefix(new ArrayList<>())
                 //根据表后缀生成

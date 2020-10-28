@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -7,13 +11,9 @@ import java.util.stream.Collectors;
  * @date : 2020/10/14
  */
 public class Test {
-    public static void main(String[] args) {
-        List<String> strings = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            strings.add(String.valueOf(i));
-        }
-        System.out.println(strings);
-        System.out.println(strings.subList(0, strings.size() > 10 ? 10 : strings.size()));
+    public static void main(String[] args) throws FileNotFoundException {
+        String s = "123456789";
+        System.out.println(s.substring(0, s.length() - 2));
     }
 
 }

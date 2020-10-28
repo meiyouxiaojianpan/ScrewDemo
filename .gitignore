@@ -25,3 +25,4 @@
 /.nb-gradle/
 
 application-local*.yml
+/src/main/resources/application-local.properties
