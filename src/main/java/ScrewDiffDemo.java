@@ -31,8 +31,8 @@ import java.util.Properties;
 public class ScrewDiffDemo {
 
     private static final String filePath = "/Users/gaozhiwen/Downloads/";
-    private static final String createFilePath = "";
-    private static final String readFilePath = "1020";
+    private static final String createFilePath = "0120";
+    private static final String readFilePath = "1218";
 
     public static void main(String[] args) throws IOException {
 
@@ -43,9 +43,9 @@ public class ScrewDiffDemo {
         DataModel dataModel = (new DataModelProcess(configuration)).process();
 
         // 存表信息
-//        for (TableModel tableModel : dataModel.getTables()) {
-//            create(tableModel);
-//        }
+        for (TableModel tableModel : dataModel.getTables()) {
+            create(tableModel);
+        }
 
         // 对比
         DiffRowGenerator generator = DiffRowGenerator.create()
@@ -77,7 +77,17 @@ public class ScrewDiffDemo {
 
 
     public static void create(TableModel tableModel) {
-        Path fpath = Paths.get(filePath + createFilePath + tableModel.getTableName() + ".txt");
+        Path fpath = Paths.get(filePath + createFilePath);
+        //创建文件夹
+        if (!Files.exists(fpath)) {
+            try {
+                Files.createDirectory(fpath);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        fpath = Paths.get(filePath + createFilePath + "/" + tableModel.getTableName() + ".txt");
         //创建文件
         if (!Files.exists(fpath)) {
             try {
